@@ -21,23 +21,24 @@ def main():
         # se il tipo di prodotto è censito come "Manuale", l'utente sarà tenuto a inserire manualmente la quantità di prodotto che vuole inserire nel lotto
         if dizionarioDiProdottiDaCreare[i] == "Manuale":
             quantita = int(input("Quante unità di "+i+" si vogliono aggiungere nel lotto?\n"))
+        elif str(dizionarioDiProdottiDaCreare[i]).isnumeric():
+            quantita = int(dizionarioDiProdottiDaCreare[i])
         else:
             # se invece non è manuale
             quantita = generaQuantitaProdotti()
-        # Gestione manuale dell'eccezione fuoriuscita qualora nel dizionario fosse presente un prodotto che però non è stato correttamente configurato nell'apposito file
+        # gestione manuale dell'eccezione fuoriuscita qualora nel dizionario fosse presente un prodotto che però non è stato correttamente configurato nell'apposito file
         try:
             elencoIstanze.append(getattr(moduloProdotti, i)(quantita))
         except AttributeError:
             print('\nIl prodotto',i,'non è stato configurato correttamente.')
         
-    # Gestione manuale dell'eccezione fuoriuscita quando si cerca di accedere ad una variabile privata della classe
+    # gestione manuale dell'eccezione fuoriuscita quando si cerca di accedere ad una variabile privata della classe
     try:
         print(elencoIstanze[0].__tempoDiProduzionePerSingolaUnita)
     except Exception as exc:
         print('\nEccezione per mostrare il risultato di un tentativo di accesso ad una variabile privata:', exc)
     # creazione dell'istanza lotto mediante l'inserimento di un array composto da n tipi di prodotti
     lotto = moduloProdotti.Lotto(elencoIstanze)
-    # lotto = prodotti.Lotto([generaSmartphone(), generaTelefoniAConchiglia(), generaTelefoniFissi()])
     lotto.stampaProdottiLotto()
     lotto.calcolaTempoTotaleLotto()
     print(lotto)
