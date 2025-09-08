@@ -15,5 +15,5 @@ MODULO_PRODOTTI = 'prodotti'
 # dizionario prodotti da creare
 PRODOTTI_DA_CREARE = {"Smartphone": "Manuale",
                       "Fisso": "Casuale",
-                      "Conchiglia": "Casuale",
+                      "Conchiglia": 26,
                       "Foldable":"Casuale"}
