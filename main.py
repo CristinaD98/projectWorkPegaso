@@ -20,7 +20,11 @@ def main():
         quantita = 0
         # se il tipo di prodotto è censito come "Manuale", l'utente sarà tenuto a inserire manualmente la quantità di prodotto che vuole inserire nel lotto
         if dizionarioDiProdottiDaCreare[i] == "Manuale":
-            quantita = int(input("Quante unità di "+i+" si vogliono aggiungere nel lotto?\n"))
+            quantita = input("Quante unità di "+i+" si vogliono aggiungere nel lotto?\n")
+            # controllo input utente
+            while not(quantita.isnumeric()):
+                quantita = input("Il valore inserito non è valido. Inserire il numero di "+i+" che si vogliono aggiungere al lotto\n")
+            quantita = int(quantita)
         elif str(dizionarioDiProdottiDaCreare[i]).isnumeric():
             quantita = int(dizionarioDiProdottiDaCreare[i])
         else:
